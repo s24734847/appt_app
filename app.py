@@ -60,7 +60,7 @@ def add_resident_page():
         owner_contact = ""
         resident_name = ""
         resident_contact = ""
-        maintenance_paid = "Yes"
+        maintenance_paid = "No"
         defaulted_amount = 0.0
 
         if st.session_state.edit_index is not None:
