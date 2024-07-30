@@ -19,6 +19,7 @@ def setup_database():
         resident_type TEXT,
         owner_name TEXT,
         owner_contact TEXT,
+        owner_email TEXT,
         resident_name TEXT,
         resident_contact TEXT,
         maintenance_paid TEXT,
@@ -30,3 +31,4 @@ def setup_database():
     conn.close()
 
 setup_database()
+

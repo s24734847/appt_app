@@ -35,20 +35,21 @@ def get_resident(apartment_number):
     conn.close()
     return resident
 
-def add_or_update_resident(apartment_number, resident_type, owner_name, owner_contact, resident_name, resident_contact, maintenance_paid, defaulted_amount):
+def add_or_update_resident(apartment_number, resident_type, owner_name, owner_contact, owner_email, resident_name, resident_contact, maintenance_paid, defaulted_amount):
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute('''
-    INSERT INTO residents (apartment_number, resident_type, owner_name, owner_contact, resident_name, resident_contact, maintenance_paid, defaulted_amount)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO residents (apartment_number, resident_type, owner_name, owner_contact, owner_email, resident_name, resident_contact, maintenance_paid, defaulted_amount)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ON CONFLICT(apartment_number) DO UPDATE SET
         resident_type = excluded.resident_type,
         owner_name = excluded.owner_name,
         owner_contact = excluded.owner_contact,
+        owner_email = excluded.owner_email,
         resident_name = excluded.resident_name,
         resident_contact = excluded.resident_contact,
         maintenance_paid = excluded.maintenance_paid,
         defaulted_amount = excluded.defaulted_amount
-    ''', (apartment_number, resident_type, owner_name, owner_contact, resident_name, resident_contact, maintenance_paid, defaulted_amount))
+    ''', (apartment_number, resident_type, owner_name, owner_contact, owner_email, resident_name, resident_contact, maintenance_paid, defaulted_amount))
     conn.commit()
     conn.close()
